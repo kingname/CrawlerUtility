@@ -4,6 +4,12 @@ Simplify the development of your webcrawler
 
 # Usage
 
+## Install
+
+```
+pip install --upgrade git+https://github.com/kingname/CrawlerUtility.git
+```
+
 ## Common Utility
 
 You can use this module without installing any third-part packages.
