@@ -20,10 +20,10 @@ class AbuyunProxyMiddleware(object):
                                      'the KEYs are ABUYUN_PROXY_SERVER, ABUYUN_PROXY_USER, ABUYUN_PROXY_PASSWORD')
 
         if spider_behind_proxy is not None and not isinstance(spider_behind_proxy, list):
-            raise FormatError('SPIDER_BEHIND_PROXY should be a list.')
+            raise FormatError('[Error] SPIDER_BEHIND_PROXY should be a list.')
 
         if skip_proxy_keyword is not None and not isinstance(skip_proxy_keyword, list):
-            raise FormatError('SKIP_PROXY_KEYWORD should be a list.')
+            raise FormatError('[Error] SKIP_PROXY_KEYWORD should be a list.')
 
         self.proxy_server = proxy_server
         self.spider_under_proxy = spider_behind_proxy
