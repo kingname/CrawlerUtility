@@ -6,7 +6,7 @@ Simplify the development of your webcrawler
 
 ## Common Utility
 
-You can use this module without install any third-part packages.
+You can use this module without installing any third-part packages.
 
 ### ChromeHeaders2Dict
 
