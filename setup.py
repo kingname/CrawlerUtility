@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 setup(
     name='CrawlerUtility',
     packages=find_packages(exclude=[]),
-    version='0.0.2',
+    version='0.0.3',
     description='Utilities to simplify the development of your webcrawler',
     author='Kingname',
     author_email='contact@kingname.info',
