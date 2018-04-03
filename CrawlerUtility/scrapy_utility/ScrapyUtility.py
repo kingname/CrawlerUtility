@@ -1,4 +1,6 @@
 import base64
+import scrapy
+import logging
 
 
 class NoProxyConfigError(Exception):
@@ -46,3 +48,35 @@ class AbuyunProxyMiddleware(object):
         if not self.spider_under_proxy or spider.name in self.spider_under_proxy:
             request.meta["proxy"] = self.proxy_server
             request.headers["Proxy-Authorization"] = self.proxy_auth
+
+
+class LogRequestUrlMiddleware(object):
+    def __init__(self, spider_to_show_request_url=None, pattern_show_request_url=None):
+
+        self.spider_list = spider_to_show_request_url
+        self.pattern_list = pattern_show_request_url
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(spider_to_show_request_url=crawler.settings['SPIDER_SHOW_REQUESTS_URL'],
+                   pattern_show_request_url=crawler.settings['PATTERN_SHOW_REQUESTS_URL'])
+
+    def process_spider_output(self, response, result, spider):
+        yield from self.log_request(result, spider)
+
+    def process_start_requests(self, start_requests, spider):
+        yield from self.log_request(start_requests, spider)
+
+    def log_request(self, iter_obj, spider):
+        if not self.spider_list or spider.name not in self.spider_list:
+            yield from iter_obj
+            return
+
+        for g in iter_obj:
+            if isinstance(g, scrapy.Request):
+                url = str(g.url)
+                for pattern in self.pattern_list:
+                    if pattern in url:
+                        logging.info('[Request To] {}'.format(g.url))
+                        break
+            yield g

@@ -54,3 +54,23 @@ ABUYUN_PROXY_PASSWORD = '94SLIC1304C' # must be set
 SPIDER_BEHIND_PROXY = ['BaiduSpider', 'QQSpider'] # list of spider name. if not set, all spider will be behind the proxy
 SKIP_PROXY_KEYWORD = ['http://google.com', 'safeurl.com/aaa'] # the urls will not use proxy if they satisfy these pattern in the list,
 ```
+
+### LogRequestUrlMiddleware
+
+In default, Scrapy will only log the response's url. But what if the request follow redirect(s)? And sometimes you make 10 post
+but Scrapy only show 5 response, you don't know if your request 5 urls in fact or the responses are missing or blocked.
+This module solves your problem by logging the request url.
+
+To use this module, you should change Scrapy's `settings.py`. Pay special attention for that this is a `Spider Middleware`,
+NOT a `Downloader middleware`
+
+```
+SPIDER_MIDDLEWARES = {
+   'CrawlerUtility.scrapy_utility.ScrapyUtility.LogRequestUrlMiddleware': 548,
+}
+
+# As log request urls will remarkablely scale up log, you should use the following settings to limit what request can be logged.
+
+SPIDER_SHOW_REQUESTS_URL = ['test'] # spiders which you want to log request urls
+PATTERN_SHOW_REQUESTS_URL = ['httpbin', 'kingname'] # only urls which satisfy the pattern will be logged.
+```
