@@ -39,7 +39,7 @@ Modify `settings.py` of your Scrapy project:
 
 ```
 DOWNLOADER_MIDDLEWARES = {
-   'ChromeHeaders2Dict.scrapy_utility.ScrapyUtility.AbuyunProxyMiddleware': 548,
+   'CrawlerUtility.scrapy_utility.ScrapyUtility.AbuyunProxyMiddleware': 548,
 }
 
 ABUYUN_PROXY_SERVER = 'http://http-dyn.abuyun.com:9020' # must be set
